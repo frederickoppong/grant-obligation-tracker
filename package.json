@@ -1,0 +1,1 @@
+{"name":"grant-obligation-tracker","private":true,"version":"0.1.0","type":"module","scripts":{"dev":"vite","build":"tsc && vite build","test":"vitest run"},"dependencies":{"react":"latest","react-dom":"latest","dexie":"latest"},"devDependencies":{"@types/react":"latest","@types/react-dom":"latest","typescript":"latest","vite":"latest","vitest":"latest"}}
