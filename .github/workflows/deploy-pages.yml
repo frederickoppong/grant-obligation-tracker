@@ -2,7 +2,7 @@ name: Deploy Alpha to GitHub Pages
 
 on:
   push:
-    branches: [phase-6-alpha]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
