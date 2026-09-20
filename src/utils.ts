@@ -1,0 +1,6 @@
+export const CLOSED=['Accepted','Not Required'];
+export const today=()=>new Date().toISOString().slice(0,10);
+export const daysUntil=(d:string,base=today())=>Math.ceil((new Date(d+'T00:00:00').getTime()-new Date(base+'T00:00:00').getTime())/86400000);
+export const csvEscape=(v:unknown)=>{const s=String(v??'');return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+export const toCsv=(rows:Record<string,unknown>[],headers:string[])=>[headers.join(','),...rows.map(r=>headers.map(h=>csvEscape(r[h])).join(','))].join('\n');
+export function parseCsv(text:string){const rows:string[][]=[];let row:string[]=[],cell='',q=false;for(let i=0;i<text.length;i++){const c=text[i];if(q){if(c==='"'&&text[i+1]==='"'){cell+='"';i++}else if(c==='"')q=false;else cell+=c}else if(c==='"')q=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'){row.push(cell.replace(/\r$/,''));rows.push(row);row=[];cell=''}else cell+=c}row.push(cell.replace(/\r$/,''));if(row.some(Boolean))rows.push(row);const [head,...data]=rows;return data.map(r=>Object.fromEntries((head||[]).map((h,i)=>[h.trim(),r[i]??''])))};
