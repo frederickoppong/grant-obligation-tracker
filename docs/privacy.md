@@ -1,11 +1,22 @@
 # Privacy Model
 
-The MVP is local-first.
+## Alpha implementation review
 
-- No login is required.
-- No application-server database is required.
-- Grant records are stored in the user's browser using IndexedDB.
-- The MVP does not intentionally transmit grant data to an application server.
-- Users can export a backup of their data.
+The current Alpha is local-first.
 
-Before any public release, this document must be reviewed against the final implementation and hosting configuration.
+- No login or user account is required.
+- No application-server database is used.
+- Grant and obligation records are stored in the user's browser with IndexedDB (database name: `GrantPilot`).
+- The application code does not intentionally send grant or obligation records to an application server, analytics service, or paid API.
+- JSON backup and CSV export are generated in the browser and downloaded by the user.
+- JSON/CSV restore reads the file selected by the user in the browser.
+- No grant documents are uploaded or stored by the application.
+- No analytics or tracking SDK is included in the current source.
+
+## Important limitations
+
+Browser-local storage belongs to the browser/device profile. Clearing site data, changing browsers/devices, or losing the device can remove locally stored records. Users should export backups regularly.
+
+Hosting the static application will necessarily involve normal web-host request metadata handled by the hosting provider, but the current application does not intentionally submit grant-record contents to that provider.
+
+This review describes the private Alpha implementation as of Phase 6. It must be reviewed again before a public release or whenever hosting, analytics, accounts, cloud synchronization, APIs, or document storage are introduced.
